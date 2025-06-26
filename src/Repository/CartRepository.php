@@ -25,8 +25,13 @@ class CartRepository extends ServiceEntityRepository
     /**
      * Récupère le panier d'un utilisateur, ou null s'il n'existe pas
      */
-    public function findOneByUser(User $user): ?Cart
+    public function findOneByUser(?User $user): ?Cart
     {
+        if (null === $user) {
+            // pas d'utilisateur connecté → pas de panier
+            return null;
+        }
+
         return $this->createQueryBuilder('c')
             ->andWhere('c.user = :user')
             ->setParameter('user', $user)
@@ -43,6 +48,7 @@ class CartRepository extends ServiceEntityRepository
         $cart->setUser($user);
         $this->_em->persist($cart);
         $this->_em->flush();
+
         return $cart;
     }
 }

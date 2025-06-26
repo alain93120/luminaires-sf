@@ -1,0 +1,14 @@
+--- a/vendor/symfony/error-handler/ErrorHandler.php
++++ b/vendor/symfony/error-handler/ErrorHandler.php
+@@ -55,7 +55,6 @@ private static function getDefaultErrorLevels(): int
+            E_WARNING           => 'Warning',
+-           \E_STRICT           => 'Runtime Notice',
+            E_NOTICE            => 'Notice',
+@@ -73,7 +72,6 @@ private static function getDefaultLogLevels(): array
+            E_USER_NOTICE       => LogLevel::NOTICE,
+-           \E_STRICT           => [null, LogLevel::WARNING],
+            E_DEPRECATED        => [null, LogLevel::INFO],
+@@ -88,7 +86,7 @@ private static function getDefaultErrorLevels(): int
+ -    private int $tracedErrors = 0x77FB; // E_ALL - E_STRICT - E_PARSE
++    private int $tracedErrors = 0x77FB; // E_ALL - E_PARSE
+

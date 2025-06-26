@@ -1,12 +1,17 @@
 <?php declare(strict_types=1);
 
-// Turn off PHP’s own error display:
+// Si E_STRICT n'existe pas (PHP 8.1+), on la définit à 0
+if (!\defined('E_STRICT')) {
+    \define('E_STRICT', 0);
+}
+
+// Désactive l’affichage direct des erreurs
 ini_set('display_errors', '0');
 
-error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);
+// Déterminez vous-mêmes le niveau d’erreurs souhaité :
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED & ~E_NOTICE);
 
-// Les use doivent être à l’intérieur du même bloc PHP,
-// et après votre déclaration error_reporting()
+// Le reste de votre bootstrap…
 use App\Kernel;
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +24,6 @@ return function (array $context) {
     }
 
     Request::enableHttpMethodParameterOverride();
-    
+
     return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
 };
