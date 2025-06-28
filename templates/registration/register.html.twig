@@ -1,23 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Créer un compte - Donkey Luminaires{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+<style>
+    .register-card {
+        max-width: 430px;
+        margin: 40px auto;
+        border-radius: 1.2rem;
+    }
+    .btn-orange {
+        background-color: #FF6900 !important;
+        color: #fff !important;
+        border-radius: 2rem;
+        border: none;
+        transition: background 0.2s;
+    }
+    .btn-orange:hover {
+        background: #e35d02 !important;
+        color: #fff !important;
+    }
+    .text-orange {
+        color: #FF6900 !important;
+    }
+</style>
 
-    <h1>Register</h1>
+<div class="card shadow register-card">
+    <div class="card-body">
+        <h3 class="card-title text-center mb-3 text-orange">Créer un compte</h3>
 
-    {{ form_errors(registrationForm) }}
+        {# Affiche les éventuelles erreurs de validation d'email ou autres flashs #}
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {# Affiche les erreurs générales du formulaire #}
+        {{ form_start(registrationForm) }}
+            {{ form_errors(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, { label: 'Mot de passe' }) }}
+
+            {% if registrationForm.agreeTerms is defined %}
+                {{ form_row(registrationForm.agreeTerms) }}
+            {% endif %}
+
+            <button type="submit" class="btn btn-orange w-100 fw-bold mt-3">Créer mon compte</button>
+        {{ form_end(registrationForm) }}
+
+        <p class="text-center mt-3 mb-0 small">
+            Déjà inscrit ? <a href="{{ path('app_login') }}">Se connecter</a>
+        </p>
+    </div>
+</div>
 {% endblock %}

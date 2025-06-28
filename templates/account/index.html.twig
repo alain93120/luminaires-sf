@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon espace client{% endblock %}
+
+{% block body %}
+<div class="container mt-5" style="max-width: 430px;">
+    <h2 class="mb-4">Mon espace client</h2>
+    {% for msg in app.flashes('success') %}
+        <div class="alert alert-success">{{ msg }}</div>
+    {% endfor %}
+
+    {{ form_start(accountForm) }}
+        {{ form_row(accountForm.email) }}
+        {{ form_row(accountForm.prenom) }}
+        {{ form_row(accountForm.nom) }}
+        {{ form_row(accountForm.telephone) }}
+        <button class="btn btn-orange mt-3 w-100">Enregistrer</button>
+    {{ form_end(accountForm) }}
+</div>
+{% endblock %}

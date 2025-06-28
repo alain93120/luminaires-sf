@@ -1,11 +1,26 @@
-<h1>Hi! Please confirm your email!</h1>
+{# templates/registration/confirmation_email.html.twig #}
+
+<p>Bonjour et bienvenue sur Donkey Luminaires !</p>
+
+
+<p>Merci de vous être inscrit sur Donkey Luminaires !</p>
 
 <p>
-    Please confirm your email address by clicking the following link: <br><br>
-    <a href="{{ signedUrl|raw }}">Confirm my Email</a>.
-    This link will expire in {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    Veuillez confirmer votre adresse email en cliquant sur le bouton ci-dessous :
+</p>
+
+<p style="text-align: center; margin: 20px 0;">
+    <a href="{{ signedUrl }}"
+       style="background-color:#FF6900; color:#fff; padding:12px 30px; border-radius:30px; text-decoration:none; font-weight:bold;">
+        Confirmer mon email
+    </a>
+</p>
+
+<p>Ou copiez-collez ce lien dans votre navigateur :<br>
+    <a href="{{ signedUrl }}">{{ signedUrl }}</a>
 </p>
 
 <p>
-    Cheers!
+    Si vous n’êtes pas à l’origine de cette inscription, ignorez cet email.<br>
+    <small>L’équipe Donkey Luminaires</small>
 </p>
